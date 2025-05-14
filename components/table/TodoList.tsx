@@ -3,6 +3,9 @@ import { Text, View, TouchableOpacity, Modal } from "react-native";
 import {styles} from "@/components/table/styles";
 import TodoModal from "../todo/TodoModal";
 
+
+
+
 type Props = {
   list: {
     name: string;
@@ -23,7 +26,7 @@ export default function TodoList({ list }: Props) {
   };
 
   const completedCount = list.todos.filter(todo => todo.completed).length;
-  const remainigCount = list.todos.length - completedCount;
+  const remainingCount = list.todos.length - completedCount;
 
   return (
     <View>
@@ -31,9 +34,7 @@ export default function TodoList({ list }: Props) {
         visible={showListVisible}
         onRequestClose={toggleListModal}
       >
-        <TodoModal list={}>
-
-        </TodoModal>
+        <TodoModal list={list} closeModal={() => toggleListModal()}/>
       </Modal>
       <TouchableOpacity style={[styles.listContainer, { backgroundColor: list.color }]} 
       onPress={toggleListModal}
@@ -49,7 +50,7 @@ export default function TodoList({ list }: Props) {
           </View>
 
           <View style={{ alignItems: "center" }}>
-            <Text style={styles.count}>{remainigCount}</Text>
+            <Text style={styles.count}>{remainingCount}</Text>
             <Text style={styles.subtitle}>Completed</Text>
           </View>
         </View>
